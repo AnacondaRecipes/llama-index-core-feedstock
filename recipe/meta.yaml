@@ -19,7 +19,6 @@ requirements:
     - python
     - hatchling
     - pip
-    - setuptools ==80.9.0
   run:
     - platformdirs
     - llama-index-workflows >=2,<3,!=2.9.0

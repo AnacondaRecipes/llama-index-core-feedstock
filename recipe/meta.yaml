@@ -1,16 +1,17 @@
 {% set name = "llama-index-core" %}
-{% set version = "0.14.13" %}
+{% set version = "0.14.22" %}
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/llama_index_core-{{ version }}.tar.gz
-  sha256: c3b30d20ae0407e5d0a1d35bb3376a98e242661ebfc22da754b5a3da1f8108c0
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_')}}-{{ version }}.tar.gz
+  sha256: 1384410f89bdbd32349aab444ef4f5c828c338787bc65bd1ffd8e86dfb44ac41
 
 build:
-  skip: true # [py<310]
+  # dataclasses-json pkg is not available for python 3.14+ on the main channel
+  skip: true # [py<310 or py>=314]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
@@ -20,24 +21,14 @@ requirements:
     - hatchling
     - pip
   run:
-    - platformdirs
-    - llama-index-workflows >=2,<3,!=2.9.0
-    - aiosqlite
-    - banks >=2.2.0,<3
-    - eval-type-backport >=0.2.0,<0.3.0
-    - filetype >=1.2.0,<2
-    - typing_extensions >=4.5.0
-    - pydantic >=2.8.0
-    - wrapt
     - python
-    - setuptools >=80.9.0
-    - sqlalchemy >=1.4.49
+    - SQLAlchemy[asyncio] >=1.4.49
     - dataclasses-json
     - deprecated >=1.2.9.3
     - fsspec >=2023.5.0
     - httpx
     - nest-asyncio >=1.5.8,<2
-    - nltk >3.8.1
+    - nltk >=3.9.3
     - numpy
     - tenacity >=8.2.0,!=8.4.0,<10.0.0
     - tiktoken >=0.7.0
@@ -49,7 +40,17 @@ requirements:
     - dirtyjson >=1.0.8,<2
     - tqdm >=4.66.1,<5
     - pillow >=9.0.0
-    - pyyaml >=6.0.1
+    - PyYAML >=6.0.1
+    - wrapt
+    - pydantic >=2.8.0
+    - filetype >=1.2.0,<2
+    - eval-type-backport >=0.2.0,<0.3 # [py<310]
+    - banks >=2.3.0,<3
+    - aiosqlite
+    - llama-index-workflows >=2.14.0,<3
+    - setuptools >=80.9.0
+    - platformdirs
+    - tinytag >=2.2.0
   run_constrained:
     - beautifulsoup4 >=4.12.2,<5.0.0
     - langchain >=0.0.303
@@ -92,7 +93,6 @@ about:
 extra:
   skip-lints:
     # Linter complaining about setuptools being in run, but it is actually a run dependency
-    - python_build_tool_in_run
     - python_build_tools_in_host
   recipe-maintainers:
     - jan-janssen

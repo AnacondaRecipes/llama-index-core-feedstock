@@ -10,7 +10,7 @@ source:
   sha256: 1384410f89bdbd32349aab444ef4f5c828c338787bc65bd1ffd8e86dfb44ac41
 
 build:
-  # dataclasses-json pkg is not available for python 3.14+ on the main channel
+  # dataclasses-json pkg is unmaintainable anymore, and does not support Python 3.14+ (https://github.com/lidatong/dataclasses-json/issues/568)
   skip: true # [py<310 or py>=314]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
@@ -22,7 +22,7 @@ requirements:
     - pip
   run:
     - python
-    - SQLAlchemy[asyncio] >=1.4.49
+    - sqlalchemy >=1.4.49
     - dataclasses-json
     - deprecated >=1.2.9.3
     - fsspec >=2023.5.0
@@ -30,7 +30,7 @@ requirements:
     - nest-asyncio >=1.5.8,<2
     - nltk >=3.9.3
     - numpy
-    - tenacity >=8.2.0,!=8.4.0,<10.0.0
+    - tenacity >=8.2.0,<10.0.0,!=8.4.0
     - tiktoken >=0.7.0
     - typing-extensions >=4.5.0
     - typing_inspect >=0.8.0
@@ -44,29 +44,12 @@ requirements:
     - wrapt
     - pydantic >=2.8.0
     - filetype >=1.2.0,<2
-    - eval-type-backport >=0.2.0,<0.3 # [py<310]
     - banks >=2.3.0,<3
     - aiosqlite
     - llama-index-workflows >=2.14.0,<3
     - setuptools >=80.9.0
     - platformdirs
     - tinytag >=2.2.0
-  run_constrained:
-    - beautifulsoup4 >=4.12.2,<5.0.0
-    - langchain >=0.0.303
-    - gradientai >=1.4.0
-    - asyncpg >=0.29.0,<0.30.0
-    - pgvector >=0.3.6,<1.0.0
-    - optimum >=1.13.2,<2.0.0
-    - sentencepiece *
-    - transformers >=4.33.1,<5.0.0
-    - guidance >=0.0.64,<0.0.65
-    - lm-format-enforcer >=0.4.3,<0.5.0
-    - jsonpath-ng >=1.6.0,<2.0.0
-    - rank-bm25 >=0.2.2,<0.3.0
-    - scikit-learn *
-    - spacy >=3.7.1,<4.0.0
-    - psycopg2-binary >=2.9.9,<3.0.0
 
 test:
   imports:

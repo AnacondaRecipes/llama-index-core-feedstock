@@ -11,7 +11,7 @@ source:
 
 build:
   # dataclasses-json pkg is unmaintainable anymore, and does not support Python 3.14+ (https://github.com/lidatong/dataclasses-json/issues/568)
-  skip: true # [py<310 or py>=314]
+  skip: true # [py<310 or py>313]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
 
@@ -40,7 +40,7 @@ requirements:
     - dirtyjson >=1.0.8,<2
     - tqdm >=4.66.1,<5
     - pillow >=9.0.0
-    - PyYAML >=6.0.1
+    - pyyaml >=6.0.1
     - wrapt
     - pydantic >=2.8.0
     - filetype >=1.2.0,<2

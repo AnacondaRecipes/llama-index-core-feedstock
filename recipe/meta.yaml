@@ -60,7 +60,7 @@ test:
 
 about:
   home: https://www.llamaindex.ai/
-  summary: Interface between LLMs and your data
+  summary: Interface between LLMs and your data.
   description: |
     The core python package to the LlamaIndex library. Core classes and
     abstractions represent the foundational building blocks for LLM

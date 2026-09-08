@@ -10,10 +10,9 @@ source:
   sha256: 4b2eb3af98eecf3579707ef018be0346bd851be2c7660102d88fab0457b95b61
 
 build:
-  # dataclasses-json pkg is unmaintainable anymore, and does not support Python 3.14+ (https://github.com/lidatong/dataclasses-json/issues/568)
-  skip: true # [py<310 or py>313]
+  skip: true # [py<310]
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 0
+  number: 1
 
 requirements:
   host:
@@ -61,7 +60,7 @@ test:
 
 about:
   home: https://www.llamaindex.ai/
-  summary: Interface between LLMs and your data
+  summary: Interface between LLMs and your data.
   description: |
     The core python package to the LlamaIndex library. Core classes and
     abstractions represent the foundational building blocks for LLM
